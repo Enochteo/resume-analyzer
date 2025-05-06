@@ -1,9 +1,9 @@
-# 🧠 AI-Powered Tech Résumé Analyzer
+#  AI-Powered Tech Résumé Analyzer
 
 A smart résumé analyzer tool built with Flask and OpenAI — designed to help tech job applicants identify gaps, optimize keywords, and prepare for job applications to top internships.
 
-> 🔨 **Current Build Status:** Resume Upload & Text Extraction Complete  
-> 🚀 **Goal:** Fully deployable, AI-integrated résumé optimization app 
+>  **Current Build Status:** Resume Upload & Text Extraction Complete  
+>  **Goal:** Fully deployable, AI-integrated résumé optimization app 
 
 ---
 ## ✅ Features (in progress)
