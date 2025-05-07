@@ -7,10 +7,14 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <h1>Upload Your Resume (PDF)</h1>
+    <label>Upload Your Resume (PDF)</label><br>
     <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="resume" accept="application/pdf" required>
+        <input type="file" name="resume" accept="application/pdf" required><br><br>
+        
+        <label>Paste Job Description:</label><br>
+        <textarea name = "job_description" rows="10" cols="60" placeholder="Paste job description here..."></textarea><br><br>
         <button type="submit">Analyze</button>
     </form>
+    
 </body>
 </html>
