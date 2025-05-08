@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <label>Upload Your Resume (PDF)</label><br>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="resume" accept="application/pdf" required><br><br>
-        
-        <label>Paste Job Description:</label><br>
-        <textarea name = "job_description" rows="10" cols="60" placeholder="Paste job description here..."></textarea><br><br>
-        <button type="submit">Analyze</button>
-    </form>
-    
-</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Upload Resume{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card p-4">
+      <h2 class="section-title text-center mb-4">📤 Upload Your Resume</h2>
+      <p class="text-muted text-center">Use AI to analyze your resume and match it against your target job.</p>
+
+      <form method="POST" enctype="multipart/form-data">
+        <!-- Upload Resume -->
+        <div class="mb-3">
+          <label for="resume" class="form-label fw-semibold">
+            <i class="bi bi-file-earmark-arrow-up"></i> Choose PDF Resume
+          </label>
+          <input type="file" class="form-control" id="resume" name="resume" accept=".pdf" required>
+        </div>
+
+        <!-- Job Description -->
+        <div class="mb-3">
+          <label for="job_description" class="form-label fw-semibold">
+            <i class="bi bi-briefcase-fill"></i> Job Description <span class="text-muted">(optional)</span>
+          </label>
+          <textarea name="job_description" class="form-control" rows="4" placeholder="Paste job description here..."></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary btn-lg">
+            <i class="bi bi-robot"></i> Analyze Resume
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

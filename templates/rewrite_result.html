@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Improved Resume{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card p-4">
+    <h2 class="mb-3 text-success">✅ Improved Resume</h2>
+    <p><strong>New Match Score:</strong> {{ score }}/100</p>
+    <pre class="bg-light p-3 rounded border">{{ rewritten }}</pre>
+
+    <button class="btn btn-outline-secondary mt-3" id="download-btn">📥 Download Resume as PDF</button>
+
+    <hr>
+    <p><strong>AI Feedback:</strong></p>
+    <pre class="bg-white p-3 rounded border">{{ feedback }}</pre>
+
+    <a href="/" class="btn btn-outline-primary mt-3">⬅ Back to Home</a>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const downloadBtn = document.getElementById("download-btn");
+
+    downloadBtn?.addEventListener("click", function () {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const resumeContent = document.querySelector(".bg-light").innerText;
+      const lines = doc.splitTextToSize(resumeContent, 180);
+
+      doc.setFontSize(12);
+      doc.text("AI-Rewritten Resume", 10, 10);
+      doc.text(lines, 10, 20);
+
+      doc.save("improved_resume.pdf");
+    });
+  });
+</script>
+{% endblock %}

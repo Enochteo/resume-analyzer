@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Rewritten Resume{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-10">
+    <div class="card p-4">
+      <h2 class="section-title mb-4 text-center">📄 AI-Rewritten Resume</h2>
+
+      {% for orig, rewrite in rewrites %}
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <h6 class="text-muted">Original</h6>
+          <div class="bg-light p-3 rounded border">
+            <pre class="m-0">{{ orig }}</pre>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h6 class="text-success">Improved</h6>
+          <div class="bg-white p-3 rounded border" id="rewrite-{{ loop.index }}">
+            <pre class="m-0">{{ rewrite }}</pre>
+          </div>
+          <button class="btn btn-outline-success btn-sm mt-2" onclick="copyToClipboard('rewrite-{{ loop.index }}')">📋 Copy</button>
+        </div>
+      </div>
+      {% endfor %}
+
+      <hr>
+      <button class="btn btn-outline-secondary mt-3" id="download-btn">📥 Download All as PDF</button>
+      <a href="/" class="btn btn-link mt-3">⬅ Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block extra_scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  function copyToClipboard(id) {
+    const text = document.getElementById(id).innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Copied to clipboard!");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const downloadBtn = document.getElementById("download-btn");
+
+    downloadBtn?.addEventListener("click", function () {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      let y = 10;
+
+      doc.setFontSize(14);
+      doc.text("AI-Rewritten Resume Comparison", 10, y);
+      y += 10;
+
+      const rows = document.querySelectorAll(".row.mb-4");
+
+      rows.forEach((row, index) => {
+        const original = row.querySelector(".text-muted + div pre")?.innerText || "";
+        const improved = row.querySelector(".text-success + div pre")?.innerText || "";
+
+        const content = `Original:\n${original}\n\nImproved:\n${improved}\n\n`;
+        const lines = doc.splitTextToSize(content, 180);
+
+        if (y + lines.length * 7 > 280) {
+          doc.addPage();
+          y = 10;
+        }
+
+        doc.text(lines, 10, y);
+        y += lines.length * 7 + 10;
+      });
+
+      doc.save("rewritten_resume.pdf");
+    });
+  });
+</script>
+{% endblock %}

@@ -1,39 +1,43 @@
-#  AI-Powered Tech Résumé Analyzer
+# 📄 SmartCV — AI-Powered Resume Analyzer
 
-A smart résumé analyzer tool built with Flask and OpenAI — designed to help tech job applicants identify gaps, optimize keywords, and prepare for job applications to top internships.
-
->  **Current Build Status:** Resume Upload & Text Extraction Complete  
->  **Goal:** Fully deployable, AI-integrated résumé optimization app 
-
----
-## ✅ Features (in progress)
-
-- [x] Upload PDF résumé
-- [x] Extract raw text from uploaded file using `pdfplumber`
-- [ ] AI-powered resume analysis (OpenAI GPT-4)
-- [ ] Job description comparison + match scoring
-- [ ] Summary/objective section generator
-- [ ] Interactive “Fix-it Mode” for bullet points
-- [ ] PDF/text export of suggestions
-
----
-## 🧪 Tech Stack
-
-- **Frontend:** HTML, CSS (Bootstrap incoming)
-- **Backend:** Flask
-- **AI Layer:** OpenAI API (GPT-4 turbo)
-- **PDF Processing:** pdfplumber
-- **Deployment (upcoming):** Render / Railway / Heroku
-
----
-## 🧑‍💻 Author
-
-**[Enoch Owoade]**  
-Engineering Technology Student • Aspiring Software/Embedded Engineer  
-GitHub: [github.com/Enochteo](https://github.com/Enochteo)
+SmartCV is an AI-powered web app that helps you analyze and improve your resume to match job descriptions using GPT-3.5. It provides actionable feedback, rewriting tools, and keyword heatmaps to boost your match score and ATS success.
 
 ---
 
-## 💬 Want to contribute or suggest features?
+## 🚀 Features
 
-Open a pull request or start a discussion!
+- ✅ Upload your PDF resume
+- ✅ Paste a job description (optional)
+- 🧠 Get detailed AI feedback (score, missing skills, improvements)
+- ✍️ Rewrite your resume with AI suggestions
+- 📊 Visualize keyword coverage with heatmaps
+- 📋 Compare original vs. rewritten resume side-by-side
+- 🔐 Login-protected dashboard
+
+---
+
+## 🔧 Tech Stack
+
+- **Frontend:** HTML, Bootstrap 5, Plotly.js
+- **Backend:** Flask (Python)
+- **AI Engine:** OpenAI GPT-3.5 Turbo
+- **PDF Handling:** pdfplumber
+- **Session Management:** Flask Sessions
+
+---
+
+## 📸 Screenshots
+
+| Resume Upload | Match Score | Keyword Heatmap |
+|---|---|---|
+| ![Upload](static/screenshots/upload.png) | ![Score](static/screenshots/score.png) | ![Heatmap](static/screenshots/heatmap.png) |
+
+
+---
+
+## 🧪 Setup Instructions
+
+### 1. Clone the repo
+```bash
+git clone https://github.com/yourusername/smartcv-resume-analyzer.git
+cd smartcv-resume-analyzer

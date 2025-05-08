@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Keyword Heatmap{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">🧠 Resume Keyword Heatmap</h2>
+  <div id="heatmap"></div>
+  <a href="/" class="btn btn-link mt-4">⬅ Back to Home</a>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+  const words = {{ words | tojson }};
+  const counts = {{ counts | tojson }};
+
+  const data = [{
+    x: words,
+    y: counts,
+    type: 'bar',
+    marker: {
+      color: counts.map(c => c === 0 ? 'red' : c === 1 ? 'orange' : 'green')
+    }
+  }];
+
+  const layout = {
+    title: "Keyword Usage in Resume",
+    yaxis: { title: "Frequency in Resume" },
+    xaxis: { tickangle: -45 }
+  };
+
+  Plotly.newPlot('heatmap', data, layout);
+</script>
+{% endblock %}
