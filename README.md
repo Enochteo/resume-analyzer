@@ -1,43 +1,134 @@
-# 📄 SmartCV — AI-Powered Resume Analyzer
 
-SmartCV is an AI-powered web app that helps you analyze and improve your resume to match job descriptions using GPT-3.5. It provides actionable feedback, rewriting tools, and keyword heatmaps to boost your match score and ATS success.
+# 🧠 SmartCV — AI-Powered Résumé Analyzer
+
+SmartCV is a Flask-based web app that helps you analyze and improve your résumé to better match job descriptions using GPT-3.5. It offers actionable AI feedback, rewriting tools, and keyword heatmaps to boost your ATS success.
 
 ---
 
 ## 🚀 Features
 
-- ✅ Upload your PDF resume
-- ✅ Paste a job description (optional)
-- 🧠 Get detailed AI feedback (score, missing skills, improvements)
-- ✍️ Rewrite your resume with AI suggestions
-- 📊 Visualize keyword coverage with heatmaps
-- 📋 Compare original vs. rewritten resume side-by-side
-- 🔐 Login-protected dashboard
+- ✅ Upload your PDF résumé  
+- ✅ Paste a job description (optional)  
+- 🧠 Get detailed AI feedback (match score, missing skills, tailored suggestions)  
+- ✍️ Rewrite your résumé with AI-powered improvements  
+- 📊 Visualize keyword coverage with interactive heatmaps  
+- 🆚 Side-by-side comparison of original vs. rewritten résumé  
+- 🔐 Login-protected dashboard  
 
 ---
 
 ## 🔧 Tech Stack
 
-- **Frontend:** HTML, Bootstrap 5, Plotly.js
-- **Backend:** Flask (Python)
-- **AI Engine:** OpenAI GPT-3.5 Turbo
-- **PDF Handling:** pdfplumber
-- **Session Management:** Flask Sessions
+- **Frontend:** HTML, Bootstrap 5, Plotly.js  
+- **Backend:** Flask (Python)  
+- **AI Engine:** OpenAI GPT-3.5 Turbo  
+- **PDF Parsing:** pdfplumber  
+- **Authentication:** Flask Sessions  
 
 ---
 
 ## 📸 Screenshots
 
-| Resume Upload | Match Score | Keyword Heatmap |
+| Upload Resume | Match Score | Keyword Heatmap |
 |---|---|---|
 | ![Upload](static/screenshots/upload.png) | ![Score](static/screenshots/score.png) | ![Heatmap](static/screenshots/heatmap.png) |
 
+---
+
+## 🛠 Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Enochteo/resume-analyzer.git
+cd resume-analyzer
+```
+
+### 2. Create and Activate a Virtual Environment
+
+**macOS/Linux**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**Windows**
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Run the Application
+
+**If using Flask:**
+```bash
+flask run
+```
+
+**If using Django (adjust accordingly):**
+```bash
+python manage.py runserver
+```
+
+Then visit:  
+- `http://127.0.0.1:5000` (Flask)  
+- `http://127.0.0.1:8000` (Django)
 
 ---
 
-## 🧪 Setup Instructions
+## 📂 Project Structure
 
-### 1. Clone the repo
-```bash
-git clone https://github.com/yourusername/smartcv-resume-analyzer.git
-cd smartcv-resume-analyzer
+```
+resume-analyzer/
+├── app/ or core/
+│   ├── templates/
+│   ├── static/
+│   ├── routes.py or views.py
+├── static/
+│   ├── css/
+│   ├── js/
+│   └── images/
+├── templates/
+│   ├── index.html
+│   ├── fixit.html
+│   ├── results.html
+│   └── rewrite_result.html
+├── requirements.txt
+├── README.md
+└── run.py / manage.py
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repo  
+2. Create your feature branch:  
+   `git checkout -b feature/your-feature`  
+3. Commit your changes:  
+   `git commit -m 'Add your feature'`  
+4. Push to the branch:  
+   `git push origin feature/your-feature`  
+5. Open a Pull Request  
+
+---
+
+## 📃 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👤 Author
+
+**Enoch Owoade**  
+📧 [Your Email Here]  
+🌐 [Your LinkedIn or Portfolio Link]
