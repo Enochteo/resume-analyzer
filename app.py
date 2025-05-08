@@ -10,6 +10,9 @@ from flask import jsonify
 from collections import Counter
 import difflib
 from flask import session, url_for
+from flask import jsonify, request
+
+
 
 
 app = Flask(__name__)
@@ -41,6 +44,23 @@ def login():
 
     return render_template("login.html")
 
+@app.route("/api/status", methods=["GET"])
+def api_status():
+    return jsonify({"status": "SmartCV API is running 🚀", "version": "1.0"}), 200
+
+@app.route("/api/score", methods=["POST"])
+def api_score():
+    data = request.get_json()
+    resume = data.get("resume", "")
+    job_description = data.get("job_description", "")
+
+    feedback = get_resume_feedback(resume, job_description)
+    score = extract_score_from_feedback(feedback)
+
+    return jsonify({
+        "score": score,
+        "feedback": feedback
+    }), 200
 
 @app.route("/logout")
 def logout():
