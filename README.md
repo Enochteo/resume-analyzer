@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 
 # 🧠 SmartCV — AI-Powered Résumé Analyzer
 
