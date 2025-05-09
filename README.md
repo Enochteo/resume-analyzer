@@ -122,6 +122,8 @@ Contributions are welcome!
 ## 👤 Author
 
 **Enoch Owoade**  
-📧 [Your Email Here]  
-🌐 [Your LinkedIn or Portfolio Link]
+📧 [enochowoade@gmail.com]  
+🌐 [https://www.linkedin.com/in/enoch-owoade/]
+🌐 [https://www.github.com/Enochteo]
+🌐 [https://enochsportfolio.netlify.app/]
 =======
