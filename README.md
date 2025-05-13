@@ -1,13 +1,11 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-# 🧠 SmartCV — AI-Powered Résumé Analyzer
+#  SmartCV — AI-Powered Résumé Analyzer
 
 SmartCV is a Flask-based web app that helps you analyze and improve your résumé to better match job descriptions using GPT-3.5. It offers actionable AI feedback, rewriting tools, and keyword heatmaps to boost your ATS success.
 
 ---
 
-## 🚀 Features
+##  Features
 
 - ✅ Upload your PDF résumé  
 - ✅ Paste a job description (optional)  
@@ -17,6 +15,9 @@ SmartCV is a Flask-based web app that helps you analyze and improve your résum�
 - 🆚 Side-by-side comparison of original vs. rewritten résumé  
 - 🔐 Login-protected dashboard  
 
+---
+Fully deployed website link: https://smartcv.onrender.com/
+---
 ---
 
 ## 🔧 Tech Stack
@@ -37,7 +38,7 @@ SmartCV is a Flask-based web app that helps you analyze and improve your résum�
 
 ---
 
-## 🛠 Setup Instructions
+##  Setup Instructions
 
 ### 1. Clone the Repository
 
@@ -106,78 +107,26 @@ resume-analyzer/
 └── run.py / manage.py
 ```
 
----
+---  
+## 🧑‍💻 Contributing
 
-## 🤝 Contributing
+1. Fork the repo
+2. Clone your fork: `git clone https://github.com/your-username/resume-analyzer.git`
+3. Create a new branch: `git checkout -b feature/your-feature`
+4. Commit and push: `git commit -m "✨ Add feature"`
+5. Open a Pull Request and explain what you changed
 
-Contributions are welcome!
-
-1. Fork the repo  
-2. Create your feature branch:  
-   `git checkout -b feature/your-feature`  
-3. Commit your changes:  
-   `git commit -m 'Add your feature'`  
-4. Push to the branch:  
-   `git push origin feature/your-feature`  
-5. Open a Pull Request  
-
----
-
-## 📃 License
-
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
+Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for ideas!
 ---
 
 ## 👤 Author
 
-**Enoch Owoade**  
-📧 [Your Email Here]  
-🌐 [Your LinkedIn or Portfolio Link]
+**Enoch Owoade** 
+
+📧 [enochowoade@gmail.com] 
+🌐 [https://www.linkedin.com/in/enoch-owoade/]
+🌐 [https://www.github.com/Enochteo]
+
+🌐 [https://enochsportfolio.netlify.app/]
+
 =======
-# 🧠 AI-Powered Tech Résumé Analyzer
-=======
-#  AI-Powered Tech Résumé Analyzer
->>>>>>> c1a3120 (Update README.md)
-
-A smart résumé analyzer tool built with Flask and OpenAI — designed to help tech job applicants identify gaps, optimize keywords, and prepare for job applications to top internships.
-
->  **Current Build Status:** Resume Upload & Text Extraction Complete  
->  **Goal:** Fully deployable, AI-integrated résumé optimization app 
-
----
-## ✅ Features (in progress)
-
-- [x] Upload PDF résumé
-- [x] Extract raw text from uploaded file using `pdfplumber`
-- [ ] AI-powered resume analysis (OpenAI GPT-4)
-- [ ] Job description comparison + match scoring
-- [ ] Summary/objective section generator
-- [ ] Interactive “Fix-it Mode” for bullet points
-- [ ] PDF/text export of suggestions
-
----
-## 🧪 Tech Stack
-
-- **Frontend:** HTML, CSS (Bootstrap incoming)
-- **Backend:** Flask
-- **AI Layer:** OpenAI API (GPT-4 turbo)
-- **PDF Processing:** pdfplumber
-- **Deployment (upcoming):** Render / Railway / Heroku
-
----
-## 🧑‍💻 Author
-
-**[Enoch Owoade]**  
-Engineering Technology Student • Aspiring Software/Embedded Engineer  
-GitHub: [github.com/Enochteo](https://github.com/Enochteo)
-
----
-
-## 💬 Want to contribute or suggest features?
-
-Open a pull request or start a discussion!
-<<<<<<< HEAD
->>>>>>> a80d490 (Added first  README)
-=======
->>>>>>> c1a3120 (Update README.md)
