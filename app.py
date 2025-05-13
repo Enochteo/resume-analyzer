@@ -123,7 +123,22 @@ def get_resume_feedback(resume_text, job_description):
 @app.route("/rewrite", methods=["POST"])
 def rewrite():
     bullet = request.form.get("bullet")
-    prompt = f"Rewrite this resume bullet point using strong action verbs and measurable impact:\n\n{bullet}"
+    prompt = f"""
+You are a career optimization expert helping users rewrite their resumes to match job descriptions.
+
+Rewrite the resume below with the following goals:
+- Emphasize keywords from the job description
+- Improve clarity, action, and measurable impact
+- Keep formatting simple and professional
+- Remove irrelevant parts
+
+Resume:
+{resume_text}
+
+Job Description:
+{job_description}
+"""
+
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}],

@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # 🧠 SmartCV — AI-Powered Résumé Analyzer
 
@@ -135,11 +136,14 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 🌐 [Your LinkedIn or Portfolio Link]
 =======
 # 🧠 AI-Powered Tech Résumé Analyzer
+=======
+#  AI-Powered Tech Résumé Analyzer
+>>>>>>> c1a3120 (Update README.md)
 
 A smart résumé analyzer tool built with Flask and OpenAI — designed to help tech job applicants identify gaps, optimize keywords, and prepare for job applications to top internships.
 
-> 🔨 **Current Build Status:** Resume Upload & Text Extraction Complete  
-> 🚀 **Goal:** Fully deployable, AI-integrated résumé optimization app 
+>  **Current Build Status:** Resume Upload & Text Extraction Complete  
+>  **Goal:** Fully deployable, AI-integrated résumé optimization app 
 
 ---
 ## ✅ Features (in progress)
@@ -173,4 +177,7 @@ GitHub: [github.com/Enochteo](https://github.com/Enochteo)
 ## 💬 Want to contribute or suggest features?
 
 Open a pull request or start a discussion!
+<<<<<<< HEAD
 >>>>>>> a80d490 (Added first  README)
+=======
+>>>>>>> c1a3120 (Update README.md)
