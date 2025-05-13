@@ -107,20 +107,17 @@ resume-analyzer/
 └── run.py / manage.py
 ```
 
+---  
+## 🧑‍💻 Contributing
+
+1. Fork the repo
+2. Clone your fork: `git clone https://github.com/your-username/resume-analyzer.git`
+3. Create a new branch: `git checkout -b feature/your-feature`
+4. Commit and push: `git commit -m "✨ Add feature"`
+5. Open a Pull Request and explain what you changed
+
+Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for ideas!
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repo  
-2. Create your feature branch:  
-   `git checkout -b feature/your-feature`  
-3. Commit your changes:  
-   `git commit -m 'Add your feature'`  
-4. Push to the branch:  
-   `git push origin feature/your-feature`  
-5. Open a Pull Request  
 
 ## 👤 Author
 
