@@ -20,7 +20,7 @@ Fully deployed website link: https://smartcv.onrender.com/
 ---
 ---
 
-## 🔧 Tech Stack
+##  Tech Stack
 
 - **Frontend:** HTML, Bootstrap 5, Plotly.js  
 - **Backend:** Flask (Python)  
@@ -30,7 +30,7 @@ Fully deployed website link: https://smartcv.onrender.com/
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 | Upload Resume | Match Score | Keyword Heatmap |
 |---|---|---|
@@ -108,7 +108,7 @@ resume-analyzer/
 ```
 
 ---  
-## 🧑‍💻 Contributing
+##  Contributing
 
 1. Fork the repo
 2. Clone your fork: `git clone https://github.com/your-username/resume-analyzer.git`
@@ -119,7 +119,7 @@ resume-analyzer/
 Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for ideas!
 ---
 
-## 👤 Author
+##  Author
 
 **Enoch Owoade** 
 
