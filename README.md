@@ -69,45 +69,19 @@ pip install -r requirements.txt
 
 ### 4. Run the Application
 
-**If using Flask:**
-```bash
-flask run
-```
 
 **If using Django (adjust accordingly):**
 ```bash
 python manage.py runserver
 ```
 
-Then visit:  
-- `http://127.0.0.1:5000` (Flask)  
+Then visit:    
 - `http://127.0.0.1:8000` (Django)
 
 ---
 
-## 📂 Project Structure
 
-```
-resume-analyzer/
-├── app/ or core/
-│   ├── templates/
-│   ├── static/
-│   ├── routes.py or views.py
-├── static/
-│   ├── css/
-│   ├── js/
-│   └── images/
-├── templates/
-│   ├── index.html
-│   ├── fixit.html
-│   ├── results.html
-│   └── rewrite_result.html
-├── requirements.txt
-├── README.md
-└── run.py / manage.py
-```
 
----  
 ##  Contributing
 
 1. Fork the repo
