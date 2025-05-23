@@ -15,12 +15,22 @@
   const words = {{ words | tojson }};
   const counts = {{ counts | tojson }};
 
+  const maxCount = Math.max(...counts);
+  const minCount = Math.min(...counts);
+
+  function interpolateGreenToRed(value) {
+    const ratio = (value - minCount) / (maxCount - minCount);
+    const r = Math.round(255 * (1 - ratio));           
+    const g = Math.round(255 * ratio);                
+    return `rgb(${r},${g},0)`;                        
+  }
+
   const data = [{
     x: words,
     y: counts,
     type: 'bar',
     marker: {
-      color: counts.map(c => c === 0 ? 'red' : c === 1 ? 'orange' : 'green')
+      color: counts.map(interpolateGreenToRed)
     }
   }];
 
