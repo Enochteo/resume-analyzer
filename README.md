@@ -36,49 +36,6 @@ Fully deployed website link: https://smartcv.onrender.com/
 |---|---|---|
 | ![Upload](static/screenshots/upload.png) | ![Score](static/screenshots/score.png) | ![Heatmap](static/screenshots/heatmap.png) |
 
----
-
-##  Setup Instructions
-
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/Enochteo/resume-analyzer.git
-cd resume-analyzer
-```
-
-### 2. Create and Activate a Virtual Environment
-
-**macOS/Linux**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-**Windows**
-```bash
-python -m venv venv
-venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Run the Application
-
-
-**If using Django (adjust accordingly):**
-```bash
-python manage.py runserver
-```
-
-Then visit:    
-- `http://127.0.0.1:8000` (Django)
-
----
 
 
 
