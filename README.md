@@ -60,4 +60,4 @@ Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for i
 
 🌐 [https://enochsportfolio.netlify.app/]
 
-=======
+
