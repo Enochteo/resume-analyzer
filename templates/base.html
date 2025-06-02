@@ -68,6 +68,15 @@
 
   <!-- Page Content -->
   <div class="container mt-5 mb-5">
+    <!-- Back Button (conditionally shown if enabled) -->
+{% if show_back_button %}
+<div class="container mt-3">
+  <a href="javascript:history.back()" class="btn btn-outline-secondary">
+    ⬅ Go Back
+  </a>
+</div>
+{% endif %}
+
     {% block content %}{% endblock %}
   </div>
 

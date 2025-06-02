@@ -48,19 +48,7 @@ def login():
 def api_status():
     return jsonify({"status": "SmartCV API is running 🚀", "version": "1.0"}), 200
 
-@app.route("/api/score", methods=["POST"])
-def api_score():
-    data = request.get_json()
-    resume = data.get("resume", "")
-    job_description = data.get("job_description", "")
 
-    feedback = get_resume_feedback(resume, job_description)
-    score = extract_score_from_feedback(feedback)
-
-    return jsonify({
-        "score": score,
-        "feedback": feedback
-    }), 200
 
 @app.route("/logout")
 def logout():
@@ -75,8 +63,9 @@ def extract_text_from_pdf(filepath):
     return text.strip()
 
 def extract_score_from_feedback(feedback):
-    match = re.search(r"\bScore\b.*?(\d{1,3})", feedback)
+    match = re.search(r"(?:Match\s*Score|Score)\D*?(\d{1,3})", feedback)
     return int(match.group(1)) if match else 0
+
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -92,9 +81,9 @@ def index():
             resume_text = extract_text_from_pdf(filepath)
             job_description = request.form.get("job_description", "")
             feedback = get_resume_feedback(resume_text, job_description)
-            score = extract_score_from_feedback(feedback)
-            print("Score:", score, type(score))
-            return render_template("results.html", resume=resume_text, feedback=feedback, score=score)
+            gpt_score = extract_score_from_feedback(feedback)
+            ats_score = calculate_ats_score(resume_text, job_description)
+            return render_template("results.html", resume=resume_text, feedback=feedback, gpt_score=gpt_score, ats_score=ats_score, show_back_button=True)
     return render_template("index.html")
 
 def get_resume_feedback(resume_text, job_description):
@@ -148,10 +137,39 @@ Job Description:
     rewritten = response.choices[0].message.content.strip()
     return jsonify({"rewritten": rewritten})
 
+def calculate_ats_score(resume_text, job_description):
+    score = 0
+    max_score = 100
+
+    # Keyword Overlap (40 pts)
+    job_keywords = get_job_keywords(job_description)
+    resume_words = set(re.findall(r'\b\w+\b', resume_text.lower()))
+    overlap = sum(1 for word in job_keywords if word in resume_words)
+    keyword_score = min(int((overlap / len(job_keywords)) * 40), 40)
+    score += keyword_score
+
+    # Resume Sections (30 pts)
+    sections = ["experience", "education", "skills", "projects"]
+    section_score = sum(1 for sec in sections if sec in resume_text.lower()) * 7.5
+    score += section_score
+
+    # Contact Info (15 pts)
+    has_email = bool(re.search(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", resume_text))
+    has_phone = bool(re.search(r"\+?\d[\d -]{8,}\d", resume_text))
+    score += 7 if has_email else 0
+    score += 8 if has_phone else 0
+
+    # Resume Length (15 pts)
+    word_count = len(resume_text.split())
+    if 300 <= word_count <= 900:
+        score += 15
+
+    return min(score, max_score)
+
 
 @app.route("/fixit", methods=["GET", "POST"])
 def fixit():
-    return render_template("fixit.html")
+    return render_template("fixit.html", show_back_button=True)
 
 
 @app.route("/rewrite_resume_from_feedback", methods=["POST"])
@@ -196,7 +214,7 @@ def rewrite_resume_from_feedback():
             for j in range(j1, j2):
                 rewrites.append(("", rewritten_lines[j]))
 
-    return render_template("rewrite_resume_based_on_feedback.html", rewrites=rewrites)
+    return render_template("rewrite_resume_based_on_feedback.html", rewrites=rewrites, show_back_button=True)
 
 @app.route("/rewrite_resume_auto", methods=["POST"])
 def rewrite_resume_auto():
@@ -205,20 +223,28 @@ def rewrite_resume_auto():
     resume = request.form.get("resume", "")
     job_description = request.form.get("job_description", "")
 
-    prompt = f"""You are a professional resume editor and recruiter. Rewrite this resume to:
-    - Increase the match score with the job description
-    - Use strong action verbs and measurable results
-    - Add keywords that align with the job
-    - Improve formatting, clarity, and impact
+    prompt = f"""
+You are a professional resume editor and recruiter. Rewrite this resume to:
+- Increase the match score with the job description
+- Use strong action verbs and measurable results
+- Add keywords that align with the job
+- Improve formatting, clarity, and impact
 
-    Job Description:
-    {job_description}
+Job Description:
+{job_description}
 
-    Resume:
-    {resume}
+Resume:
+{resume}
 
-    Output only the rewritten resume, nothing else.
-    """
+After rewriting, give an estimated match score (0-100) based on the job description.
+
+Output Format:
+Rewritten Resume:
+<your content>
+
+Match Score: <number>
+"""
+
 
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
@@ -233,7 +259,23 @@ def rewrite_resume_auto():
     feedback = get_resume_feedback(rewritten_resume, job_description)
     score = extract_score_from_feedback(feedback)
 
-    return render_template("rewrite_result.html", original=resume, rewritten=rewritten_resume, score=score, feedback=feedback)
+    return render_template("rewrite_result.html", original=resume, rewritten=rewritten_resume, score=score, feedback=feedback, show_back_button=True)
+
+@app.route("/keyword_heatmap", methods=["POST"])
+def keyword_heatmap():
+    if not session.get("logged_in"):
+        return redirect(url_for("login"))
+    resume = request.form.get("resume", "")
+    job_description = request.form.get("job_description", "")
+
+    job_keywords = get_job_keywords(job_description)
+    data = keyword_overlap(job_keywords, resume)
+
+    # Sort top 20 keywords
+    data = sorted(data, key=lambda x: x[1], reverse=True)[:20]
+    words, counts = zip(*data)
+
+    return render_template("keyword_heatmap.html", words=words, counts=counts, show_back_button=True)
 
 def get_job_keywords(text):
     stopwords = {"and", "or", "with", "a", "an", "the", "in", "for", "of", "to", "on", "at", "by", "is"}
@@ -251,21 +293,23 @@ def keyword_overlap(job_keywords, resume_text):
         data.append((word, resume_count))
     return data
 
-@app.route("/keyword_heatmap", methods=["POST"])
-def keyword_heatmap():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
-    resume = request.form.get("resume", "")
-    job_description = request.form.get("job_description", "")
+@app.route("/api/score", methods=["POST"])
+def api_score():
+    data = request.get_json()
+    resume = data.get("resume", "")
+    job_description = data.get("job_description", "")
 
-    job_keywords = get_job_keywords(job_description)
-    data = keyword_overlap(job_keywords, resume)
+    feedback = get_resume_feedback(resume, job_description)
+    gpt_score = extract_score_from_feedback(feedback)
+    ats_score = calculate_ats_score(resume, job_description)
 
-    # Sort top 20 keywords
-    data = sorted(data, key=lambda x: x[1], reverse=True)[:20]
-    words, counts = zip(*data)
+    return jsonify({
+        "gpt_match_score": gpt_score,
+        "ats_friendly_score": ats_score,
+        "feedback": feedback
+    }), 200
 
-    return render_template("keyword_heatmap.html", words=words, counts=counts)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=5050)
