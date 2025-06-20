@@ -28,7 +28,7 @@ Password: 1234
 - **Backend:** Flask (Python)  
 - **AI Engine:** OpenAI GPT-3.5 Turbo  
 - **PDF Parsing:** pdfplumber  
-- **Authentication:** Flask Sessions  
+- **Authentication:** Flask Sessions.
 
 ---
 
