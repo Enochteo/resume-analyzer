@@ -1,5 +1,5 @@
 
-#  SmartCV — AI-Powered Résumé Analyzer
+#  SmartCV — AI-Powered Resume Analyzer
 
 SmartCV is a Flask-based web app that helps you analyze and improve your résumé to better match job descriptions using GPT-3.5. It offers actionable AI feedback, rewriting tools, and keyword heatmaps to boost your ATS success.
 
