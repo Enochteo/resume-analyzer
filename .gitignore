@@ -1,8 +1,12 @@
 __pycache__/
 venv/
+uploads/
 .env
 *.pyc
 *.pyo
 *.pyd
 *.sqlite3
 .DS_Store
+.
+/instance
+/migrations

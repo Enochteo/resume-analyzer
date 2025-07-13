@@ -47,6 +47,17 @@
 </head>
 
 <body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
   <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
     <div class="container">
@@ -56,7 +67,7 @@
       </a>
   
       <div class="d-flex">
-        {% if session.get("logged_in") %}
+        {% if current_user.is_authenticated %}
           <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-sm">
             <i class="bi bi-box-arrow-right"></i> Logout
           </a>
@@ -68,6 +79,15 @@
 
   <!-- Page Content -->
   <div class="container mt-5 mb-5">
+    <!-- Back Button (conditionally shown if enabled) -->
+{% if show_back_button %}
+<div class="container mt-3">
+  <a href="javascript:history.back()" class="btn btn-outline-secondary">
+    ⬅ Go Back
+  </a>
+</div>
+{% endif %}
+
     {% block content %}{% endblock %}
   </div>
 

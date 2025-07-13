@@ -11,36 +11,60 @@
       <h5 class="text-primary">💡 AI Feedback</h5>
       <pre class="bg-light p-3 rounded border">{{ feedback }}</pre>
 
-      <!-- Match Score Bar -->
-      {% if score is defined and score is not none %}
-        {% set color = "red" %}
-        {% if score >= 80 %}
-            {% set color = "#4caf50" %}
-        {% elif score >= 50 %}
-            {% set color = "#ffcc00" %}
-        {% endif %}
-        {% set bar_style = "width: {}%; height: 100%; background-color: {}; border-radius: 10px;".format(score, color) %}
+      <!-- GPT Match Score -->
+<h5 class="mt-4">🤖 GPT Match Score</h5>
+{% set gpt_color = "red" %}
+{% if gpt_score >= 80 %}
+    {% set gpt_color = "#4caf50" %}
+{% elif gpt_score >= 50 %}
+    {% set gpt_color = "#ffcc00" %}
+{% endif %}
+{% set gpt_bar = "width: {}%; height: 100%; background-color: {}; border-radius: 10px;".format(gpt_score, gpt_color) %}
+<div style="background: #eee; border-radius: 10px; width: 100%; height: 30px;">
+  <div class="score-bar" style="{{ gpt_bar }}">
+    <span style="padding-left: 10px; color: white; font-weight: bold;">{{ gpt_score }}%</span>
+  </div>
+</div>
+<p class="mt-2 fw-bold" style="color:
+    {% if gpt_score >= 80 %}#4caf50
+    {% elif gpt_score >= 50 %}#ffcc00
+    {% else %}red
+    {% endif %}
+">
+  Match Quality:
+  {% if gpt_score >= 80 %}Strong Match
+  {% elif gpt_score >= 50 %}Moderate Match
+  {% else %}Needs Improvement
+  {% endif %}
+</p>
 
-        <h5 class="mt-4">Match Score</h5>
-        <div style="background: #eee; border-radius: 10px; width: 100%; height: 30px;">
-          <div class="score-bar" style="{{ bar_style }}">
-            <span style="padding-left: 10px; color: white; font-weight: bold;">{{ score }}%</span>
-          </div>
-        </div>
+<!-- ATS Friendly Score -->
+<h5 class="mt-4">🧠 ATS Friendly Score</h5>
+{% set ats_color = "red" %}
+{% if ats_score >= 80 %}
+    {% set ats_color = "#4caf50" %}
+{% elif ats_score >= 50 %}
+    {% set ats_color = "#ffcc00" %}
+{% endif %}
+{% set ats_bar = "width: {}%; height: 100%; background-color: {}; border-radius: 10px;".format(ats_score, ats_color) %}
+<div style="background: #eee; border-radius: 10px; width: 100%; height: 30px;">
+  <div class="score-bar" style="{{ ats_bar }}">
+    <span style="padding-left: 10px; color: white; font-weight: bold;">{{ ats_score }}%</span>
+  </div>
+</div>
+<p class="mt-2 fw-bold" style="color:
+    {% if ats_score >= 80 %}#4caf50
+    {% elif ats_score >= 50 %}#ffcc00
+    {% else %}red
+    {% endif %}
+">
+  ATS Compatibility:
+  {% if ats_score >= 80 %}Highly ATS-Compatible
+  {% elif ats_score >= 50 %}Moderately ATS-Compatible
+  {% else %}Low ATS Compatibility
+  {% endif %}
+</p>
 
-        <p class="mt-2 fw-bold" style="color:
-            {% if score >= 80 %}#4caf50
-            {% elif score >= 50 %}#ffcc00
-            {% else %}red
-            {% endif %}
-        ">
-          Match Quality:
-          {% if score >= 80 %}Strong Match
-          {% elif score >= 50 %}Moderate Match
-          {% else %}Needs Improvement
-          {% endif %}
-        </p>
-      {% endif %}
 
       <!-- Improve Options -->
       <h5 class="mt-4 mb-3">🛠️ Improve Your Resume</h5>
