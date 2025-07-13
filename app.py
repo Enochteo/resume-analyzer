@@ -260,7 +260,7 @@ Resume:
 {resume}
 
 After rewriting, give an estimated match score (0-100) based on the job description.
-
+ 
 Output Format:
 Rewritten Resume:
 <your content>
