@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="text-center mb-4">Register</h2>
+<form method="post">
+    <div class="mb-3">
+        <label for="full_name" class="form-label">Full-Name</label>
+        <input type="text" name="full_name" placeholder="Full Name" class="form-control" required>
+      </div>
+    
+    <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" placeholder="Email" required>
+      </div>
+
+    <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required placeholder="Password">
+      </div>
+
+    <button type="submit" class="btn btn-primary w-100">Register</button>
+</form>
+
+{% endblock %}
