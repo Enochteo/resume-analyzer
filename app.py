@@ -1,58 +1,83 @@
 import os
 import re
 import openai
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash
 import pdfplumber
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
 from openai import OpenAI
-from flask import jsonify
 from collections import Counter
 import difflib
-from flask import session, url_for
-from flask import jsonify, request
-
-
+from flask_login import login_user, logout_user, login_required, LoginManager
+from models import db, User
+from flask_migrate import Migrate
 
 
 app = Flask(__name__)
+
+login_manager = LoginManager()
+login_manager.login_view = 'login'
+login_manager.init_app(app)
+
 UPLOAD_FOLDER = "uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///app.db'
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
-app.secret_key = os.getenv("SECRET_KEY", "changeme")  
-VALID_USERNAME = os.getenv("APP_USERNAME")
-VALID_PASSWORD = os.getenv("APP_PASSWORD")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")  
 
 load_dotenv()
-print("Loaded API Key:", os.getenv("OPENAI_API_KEY"))
+#print("Loaded API Key:", os.getenv("OPENAI_API_KEY"))
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        full_name = request.form.get("full_name")
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        if User.query.filter_by(email=email).first():
+            flash("Email already registered")
+            return redirect(url_for("login"))
+        new_user = User(full_name=full_name, email=email)
+        new_user.set_password(password)
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user)
+        return redirect(url_for("index"))
+    else:
+        return render_template("auth/register.html")
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form.get("username")
+        email = request.form.get("email")
         password = request.form.get("password")
-
-        if username == VALID_USERNAME and password == VALID_PASSWORD:
-            session["logged_in"] = True
+        user = User.query.filter_by(email=email).first()
+        if user and user.check_password(password):
+            login_user(user)
             return redirect(url_for("index"))
         else:
-            return render_template("login.html", error="Invalid credentials")
-
-    return render_template("login.html")
+            return render_template("auth/login.html", error="Invalid credentials")
+    return render_template("auth/login.html")
 
 @app.route("/api/status", methods=["GET"])
 def api_status():
-    return jsonify({"status": "SmartCV API is running 🚀", "version": "1.0"}), 200
-
+    return jsonify({"status": "SmartCV API is running", "version": "1.0"}), 200
 
 
 @app.route("/logout")
 def logout():
-    session.clear()
+    logout_user()
     return redirect(url_for("login"))
 
 def extract_text_from_pdf(filepath):
@@ -68,9 +93,8 @@ def extract_score_from_feedback(feedback):
 
 
 @app.route("/", methods=["GET", "POST"])
+@login_required
 def index():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
     resume_text = ""
     if request.method == "POST":
         uploaded_file = request.files.get("resume")
@@ -217,9 +241,8 @@ def rewrite_resume_from_feedback():
     return render_template("rewrite_resume_based_on_feedback.html", rewrites=rewrites, show_back_button=True)
 
 @app.route("/rewrite_resume_auto", methods=["POST"])
+@login_required
 def rewrite_resume_auto():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
     resume = request.form.get("resume", "")
     job_description = request.form.get("job_description", "")
 
@@ -262,9 +285,8 @@ Match Score: <number>
     return render_template("rewrite_result.html", original=resume, rewritten=rewritten_resume, score=score, feedback=feedback, show_back_button=True)
 
 @app.route("/keyword_heatmap", methods=["POST"])
+@login_required
 def keyword_heatmap():
-    if not session.get("logged_in"):
-        return redirect(url_for("login"))
     resume = request.form.get("resume", "")
     job_description = request.form.get("job_description", "")
 
@@ -309,7 +331,8 @@ def api_score():
         "feedback": feedback
     }), 200
 
-
+db.init_app(app)
+migrate = Migrate(app, db)
 
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=5050)
