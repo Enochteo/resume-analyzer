@@ -10,7 +10,7 @@ SmartCV is a Flask-based web app that helps you analyze and improve your résum�
 -  Upload your PDF résumé  
 -  Paste a job description 
 -  Get detailed AI feedback (match score, missing skills, tailored suggestions)  
--  Rewrite your résumé with AI-powered improvements  
+-  Rewrite your resume with AI-powered improvements  
 -  Visualize keyword coverage with interactive heatmaps  
 -  Side-by-side comparison of original vs. rewritten résumé  
 - Login-protected dashboard  
