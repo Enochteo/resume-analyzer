@@ -34,7 +34,7 @@ Fully deployed website link: https://smartcv.onrender.com/
 
 | Register | Login | Upload Resume | Match Score | Keyword Heatmap |
 |---|---|---|---|---|
-| <img width="694" height="582" alt="Screenshot 2025-07-13 at 1 40 23 AM" src="https://github.com/user-attachments/assets/d921a152-51ae-4e07-ae33-23657b110a5d" /> | <img width="694" height="623" alt="Screenshot 2025-07-13 at 1 40 13 AM" src="https://github.com/user-attachments/assets/0bcd6f2c-cbf0-49dd-a258-97204c172551" /> | ![Upload](static/screenshots/upload.png) | ![Score](static/screenshots/score.png) | ![Heatmap](static/screenshots/heatmap.png) |
+| ![Register](static/screenshots/Register.png) | ![Login](static/screenshots/Login.png) | ![Upload](static/screenshots/upload.png) | ![Score](static/screenshots/score.png) | ![Heatmap](static/screenshots/heatmap.png) |
 
 
 
