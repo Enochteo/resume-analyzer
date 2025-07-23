@@ -47,7 +47,7 @@ Fully deployed website link: https://smartcv.onrender.com/
 4. Commit and push: `git commit -m "Add feature"`
 5. Open a Pull Request and explain what you changed. Thanks
 
-Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for ideas!
+Check the [Issues](https://github.com/Enochteo/resume-analyzer/issues) tab for ideas
 ---
 
 ##  Author
