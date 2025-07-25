@@ -16,7 +16,7 @@ SmartCV is a Flask-based web app that helps you analyze and improve your r√©sum√
 - Login-protected dashboard  
 
 ---
-Fully deployed website link: https://smartcv.onrender.com/
+Deployed website link: https://smartcv.onrender.com/
 ---
 ---
 
